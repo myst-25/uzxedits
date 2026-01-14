@@ -1,8 +1,7 @@
-// Enhanced portfolio script with improved functionality and custom cursor
+// Enhanced portfolio script with triadic color scheme and improved custom cursor
 document.addEventListener('DOMContentLoaded', function(){
-  console.log('Enhanced portfolio script loaded');
+  console.log('Enhanced triadic portfolio loaded');
   
-  // Initialize all features
   initCustomCursor();
   initTimeline();
   initMobileNavigation();
@@ -14,14 +13,12 @@ document.addEventListener('DOMContentLoaded', function(){
   initSlideshow();
   setCurrentYear();
   
-  // Re-initialize clips after a short delay
   setTimeout(initEditableClips, 200);
   setTimeout(initEditableClips, 1000);
 });
 
-// Custom Cursor Implementation
+// Enhanced Custom Cursor with Triadic Colors
 function initCustomCursor() {
-  // Only initialize on non-touch devices
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     return;
   }
@@ -29,12 +26,12 @@ function initCustomCursor() {
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
   cursor.innerHTML = `
-    <svg class="cursor-pause active" width="32" height="32" viewBox="0 0 24 24" fill="none">
-      <rect x="6" y="4" width="4" height="16" fill="white" rx="1"/>
-      <rect x="14" y="4" width="4" height="16" fill="white" rx="1"/>
+    <svg class="cursor-pause active" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="4" width="4" height="16" fill="#4FC3F7" rx="1"/>
+      <rect x="14" y="4" width="4" height="16" fill="#4FC3F7" rx="1"/>
     </svg>
-    <svg class="cursor-play" width="32" height="32" viewBox="0 0 24 24" fill="none">
-      <path d="M8 5v14l11-7z" fill="white"/>
+    <svg class="cursor-play" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 5v14l11-7z" fill="#9CCC65"/>
     </svg>
   `;
   document.body.appendChild(cursor);
@@ -50,7 +47,6 @@ function initCustomCursor() {
     mouseY = e.clientY;
   });
   
-  // Smooth cursor follow
   function animateCursor() {
     const dx = mouseX - cursorX;
     const dy = mouseY - cursorY;
@@ -63,14 +59,13 @@ function initCustomCursor() {
   }
   animateCursor();
   
-  // Interactive elements
   const interactiveElements = 'a, button, .btn, .timeline-btn, .clip, .slide-nav, .indicator, input, textarea, select';
   
   document.addEventListener('mouseover', (e) => {
     if (e.target.closest(interactiveElements)) {
       pauseIcon.classList.remove('active');
       playIcon.classList.add('active');
-      cursor.style.transform += ' scale(1.3)';
+      cursor.style.transform += ' scale(1.2)';
     }
   });
   
@@ -78,12 +73,11 @@ function initCustomCursor() {
     if (e.target.closest(interactiveElements)) {
       playIcon.classList.remove('active');
       pauseIcon.classList.add('active');
-      cursor.style.transform = cursor.style.transform.replace(' scale(1.3)', '');
+      cursor.style.transform = cursor.style.transform.replace(' scale(1.2)', '');
     }
   });
 }
 
-// Set current year in footer
 function setCurrentYear() {
   const yearElement = document.getElementById('year');
   if (yearElement) {
@@ -91,7 +85,6 @@ function setCurrentYear() {
   }
 }
 
-// Video manager - stop other videos when one starts playing
 function initVideoManager() {
   const videos = document.querySelectorAll('video');
   
@@ -106,7 +99,6 @@ function initVideoManager() {
   });
 }
 
-// Mobile navigation
 function initMobileNavigation() {
   const navToggle = document.querySelector('.nav-toggle');
   const header = document.querySelector('.site-header');
@@ -138,7 +130,6 @@ function initMobileNavigation() {
   }
 }
 
-// Smooth scrolling for navigation links
 function initSmoothScrolling() {
   const navLinks = document.querySelectorAll('a[href^="#"]');
   
@@ -164,7 +155,6 @@ function initSmoothScrolling() {
   });
 }
 
-// Contact form with validation
 function initContactForm() {
   const form = document.getElementById('contact-form');
   
@@ -185,7 +175,7 @@ function initContactForm() {
       submitBtn.disabled = true;
       
       setTimeout(() => {
-        showFormFeedback('success', 'Thank you for your message! I\'ll get back to you within 2-4 hours.');
+        showFormFeedback('success', 'Thank you! I\'ll get back to you within 2-4 hours.');
         form.reset();
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
@@ -206,7 +196,7 @@ function validateForm(data) {
   }
   
   if (!data.message || data.message.trim().length < 10) {
-    errors.push('Please provide more details about your project (minimum 10 characters)');
+    errors.push('Please provide more details (minimum 10 characters)');
   }
   
   if (errors.length > 0) {
@@ -239,8 +229,8 @@ function showFormFeedback(type, message) {
     line-height: 1.4;
     animation: slideIn 0.3s ease-out;
     ${type === 'success' 
-      ? 'background: rgba(94,234,212,0.1); border: 1px solid rgba(94,234,212,0.3); color: #5eead4;'
-      : 'background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: #ff4757;'
+      ? 'background: rgba(156,204,101,0.15); border: 1px solid #9CCC65; color: #9CCC65;'
+      : 'background: rgba(236,64,122,0.15); border: 1px solid #EC407A; color: #EC407A;'
     }
   `;
   
@@ -257,7 +247,6 @@ function showFormFeedback(type, message) {
   }
 }
 
-// Initialize scroll-triggered animations
 function initAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -279,7 +268,6 @@ function initAnimations() {
   });
 }
 
-// Keyboard navigation
 function initKeyboardNavigation() {
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
@@ -298,7 +286,6 @@ function initKeyboardNavigation() {
   });
 }
 
-// Initialize timeline functionality
 function initTimeline() {
   console.log('Initializing timeline...');
   
@@ -547,7 +534,6 @@ function initEditableClips() {
   });
 }
 
-// Video Slideshow Functionality
 function initSlideshow() {
   const slides = document.querySelectorAll('.video-slide');
   const indicators = document.querySelectorAll('.indicator');
