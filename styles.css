@@ -1010,7 +1010,8 @@ section > h3{
 /* Legacy project grid (hidden but kept for compatibility) */
 .projects-grid {
   display: none;
-    max-width: clamp(900px, 78vw, 1200px);
+  max-width: clamp(900px, 78vw, 1200px);
+}
 
 .link{
   color:var(--accent);
